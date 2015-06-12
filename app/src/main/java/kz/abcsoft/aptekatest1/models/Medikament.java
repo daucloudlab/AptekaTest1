@@ -25,6 +25,14 @@ public class Medikament {
         this.setImage(image);
     }
 
+    public Medikament(String mid, String aid, String title, String description, double price){
+        this.mid = mid ;
+        this.aid = aid ;
+        this.title = title ;
+        this.description = description ;
+        this.price = price ;
+    }
+
 
     public String getMid() {
         return mid;

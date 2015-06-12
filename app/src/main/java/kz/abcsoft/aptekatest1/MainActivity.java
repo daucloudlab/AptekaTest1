@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         initNavigationDrawer();
 
-//        fm.beginTransaction().add(R.id.main_activity_container, new MainFragment()).commit() ;
+        fm.beginTransaction().add(R.id.main_activity_container, new MainFragment()).commit() ;
 
     }
 
@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
                                 return false;
                             case 3:
-//                                fm.beginTransaction().replace(R.id.main_activity_container, new MainFragment())
-//                                        .commit();
-//                                toolbar.setTitle(R.string.main_toolbar_title);
+                                fm.beginTransaction().replace(R.id.main_activity_container, new MainFragment())
+                                        .commit();
+                                toolbar.setTitle(R.string.main_toolbar_title);
                                 return false;
                         }
                         return false;

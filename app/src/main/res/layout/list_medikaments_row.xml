@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >
+
+    <TextView
+        android:id = "@+id/medikament_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp"
+        android:textSize="17dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id = "@+id/apteka_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/medikament_title"
+        android:layout_marginTop="1dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp"
+        android:textSize="15dip" />
+
+
+    <TextView
+        android:id = "@+id/apteka_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/apteka_title"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id = "@+id/medikament_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/apteka_id"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"/>
+
+
+    <ImageView
+        android:id = "@+id/icon_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src  = "@drawable/arrow"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id = "@+id/medikament_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dip"
+
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/icon_tip"
+
+        android:textSize="13dip" />
+
+
+
+</RelativeLayout>

@@ -19,6 +19,11 @@ public class Apteka {
         this.setLongitude(longitude);
     }
 
+    public Apteka(String aid, String name){
+        this.aid = aid ;
+        this.name = name ;
+    }
+
     public String getAid(){
         return aid ;
     }

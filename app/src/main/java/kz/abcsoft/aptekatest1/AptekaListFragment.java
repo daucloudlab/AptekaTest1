@@ -48,15 +48,6 @@ public class AptekaListFragment extends Fragment {
         new ApteksListTask().execute() ;
 
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
-//                Intent intent = new Intent(getActivity(), AptekaDetailActivity.class);
-//                intent.putExtra("pid", pid);
-//                startActivity(intent);
-//            }
-//        });
 
         aptekaSearch = (EditText)view.findViewById(R.id.inputAptekSearch) ;
         aptekaSearch.addTextChangedListener(new TextWatcher() {
@@ -125,6 +116,17 @@ public class AptekaListFragment extends Fragment {
             listView.setAdapter(adapter);
 
             dialog.dismiss();
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
+                    Intent intent = new Intent(getActivity(), AptekaDetailActivity.class);
+                    intent.putExtra("pid", pid);
+                    startActivity(intent);
+                }
+            });
+
         }
     }
 
