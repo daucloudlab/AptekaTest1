@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Аптеки</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name = "main_toolbar_title">Список медикаментов</string>
+    <string name = "search_apteks_title">Поиск аптек</string>
+    <string name="search_medikaments_title">Поиск медикаментов</string>
+    <string name="phone_title">Позвонить аптеку</string>
+    <string name="get_addresses_title">Получить адрес аптеки</string>
+    <string name = "get_phones_title">Получить список телефонов</string>
+
+    <string name = "nav_menu_item_apteki">Аптеки</string>
+    <string name = "nav_menu_item_near_apteki">Карта аптек</string>
+    <string name = "nav_menu_item_search_medikament">Медикаменты</string>
+    <string name="title_activity_maps">Карта аптек</string>
+    <string name="medikament_detail_toolbar_title">Подробная информация о медикаменте</string>
+
+</resources>
