@@ -20,6 +20,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import kz.abcsoft.aptekatest1.MedikamentDetailActivity;
 import kz.abcsoft.aptekatest1.R;
 import kz.abcsoft.aptekatest1.adapters.AptekaMedikamentListAdapter;
 import kz.abcsoft.aptekatest1.models.Apteka;
@@ -27,7 +28,6 @@ import kz.abcsoft.aptekatest1.models.Medikament;
 
 public class Fragment1 extends Fragment {
 
-    private ProgressDialog dialog ;
     private List<ParseObject> mObjects ;
     private List<Medikament> categoryMedikaments ;
     private String pid ;
@@ -44,39 +44,20 @@ public class Fragment1 extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment1, container, false) ;
 
         pid = getActivity().getIntent().getStringExtra("pid") ;
-//        int pidInteger = Integer.parseInt(pid) ;
-////        final String mid = getActivity().getIntent().getStringExtra("mid") ; // Мен бұлай ала алмаймын
-//
-//        final ArrayList<Medikament> medikamentsCategory1 =
-//                MedikamentTestList.getAptekaMedikamentsByCategory1(getMedikamentsForDifCategory(pidInteger)) ;
-//
 
         new CategoryMedikamentsTask().execute() ;
 
 
-//
-//
 
         return rootView ;
     }
 
-//    private ArrayList<Medikament> getMedikamentsForDifCategory(int id){
-//
-//        List<Apteka> listApteks = AptekaTestList.getListApteks() ;
-//        Apteka apteka = AptekaTestList.getApteka(id) ;
-//
-//        ArrayList<Medikament> medikaments = MedikamentTestList.getAptekaMedikaments(apteka.getId()) ;
-//
-//        return medikaments ;
-//    }
 
     private class CategoryMedikamentsTask extends AsyncTask<Void, Void, Void>{
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new ProgressDialog(getActivity()) ;
-            dialog.setMessage("подождите...");
-            dialog.show();
         }
 
         @Override
@@ -119,18 +100,16 @@ public class Fragment1 extends Fragment {
                     categoryMedikaments) ;
             medikamentsListView.setAdapter(medikamentListAdapter);
             Log.d("CATEGORY_MEDIKAMENTS", categoryMedikaments.toString()) ;
-            dialog.dismiss();
 
-//            medikamentsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                    Intent medikamentDetailIntent = new Intent(getActivity(), MedikamentDetailActivity.class);
-//                    medikamentDetailIntent.putExtra("pid", pid);
-//                    Medikament medikament = medikamentsCategory1.get(i);
-//                    medikamentDetailIntent.putExtra("mid", Integer.toString(medikament.getMid()));
-//                    startActivity(medikamentDetailIntent);
-//                }
-//            }) ;
+            medikamentsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent medikamentDetailIntent = new Intent(getActivity(), MedikamentDetailActivity.class);
+                    medikamentDetailIntent.putExtra("pid", pid);
+                    medikamentDetailIntent.putExtra("mid", categoryMedikaments.get(i).getMid());
+                    startActivity(medikamentDetailIntent);
+                }
+            }) ;
 
         }
     }

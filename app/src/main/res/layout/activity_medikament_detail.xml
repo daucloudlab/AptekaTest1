@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include android:id = "@+id/activity_medikament_detail_toolbar"
+        layout = "@layout/main_toolbar"/>
+
+</LinearLayout>
+
+        <TextView
+            android:id = "@+id/medikament_apteka_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "apteka name"
+            android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id = "@+id/medikament_title_in_med_detail_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Medikament name"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id = "@+id/medikament_description_in_med_detail_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Medikament description"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id = "@+id/medikament_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "medikament price"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Здесь должен быть подробная информация о медикаменте"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+
+</LinearLayout>
