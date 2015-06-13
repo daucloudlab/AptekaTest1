@@ -108,8 +108,9 @@ public class MainFragment extends Fragment {
                     ParseObject aptekaObject = m.getParseObject("apteka_rel") ;
                     String aid = aptekaObject.fetchIfNeeded().getObjectId() ;
                     String aptekaName = aptekaObject.fetchIfNeeded().getString("name") ;
-                    Medikament medikament = new Medikament(mid, aid, medikamentTitle, medikamentDescription, medikamentPrice) ;
-                    Apteka apteka = new Apteka(aid, aptekaName) ;
+                    String aptekaPhone = aptekaObject.fetchIfNeeded().getString("phone") ;
+                     Medikament medikament = new Medikament(mid, aid, medikamentTitle, medikamentDescription, medikamentPrice) ;
+                    Apteka apteka = new Apteka(aid, aptekaName, aptekaPhone) ;
 
                     listApteks.add(apteka) ;
                     listMedikaments.add(medikament) ;

@@ -19,9 +19,10 @@ public class Apteka {
         this.setLongitude(longitude);
     }
 
-    public Apteka(String aid, String name){
+    public Apteka(String aid, String name, String phone){
         this.aid = aid ;
         this.name = name ;
+        this.phone = phone ;
     }
 
     public String getAid(){
