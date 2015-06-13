@@ -89,6 +89,7 @@ public class AptekaListFragment extends Fragment {
 
             try {
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Apteka");
+                query.fromLocalDatastore() ;
                 parseObjects = query.find();
 
                 for (ParseObject a : parseObjects) {

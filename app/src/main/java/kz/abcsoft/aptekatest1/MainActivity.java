@@ -49,6 +49,30 @@ public class MainActivity extends AppCompatActivity {
 
         fm.beginTransaction().add(R.id.main_activity_container, new MainFragment()).commit() ;
 
+        ParseQuery<ParseObject> query1 = ParseQuery.getQuery("Apteka") ;
+        query1.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                try{
+                    ParseObject.pinAll(list);
+                }catch (ParseException e1){
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Medikament") ;
+        query2.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                try{
+                    ParseObject.pinAll(list);
+                }catch (ParseException e2){
+                    e2.printStackTrace();
+                }
+            }
+        });
+
     }
 
 

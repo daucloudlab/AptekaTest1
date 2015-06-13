@@ -84,9 +84,11 @@ public class Fragment1 extends Fragment {
             categoryMedikaments = new ArrayList<Medikament>() ;
 
             ParseQuery<ParseObject> apteksQuery = ParseQuery.getQuery("Apteka") ;
+            apteksQuery.fromLocalDatastore() ;
             apteksQuery.whereEqualTo("objectId", pid) ;
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Medikament") ;
+            query.fromLocalDatastore() ;
             query.whereEqualTo("category_id", "1") ;
 
             query.whereMatchesQuery("apteka_rel", apteksQuery);

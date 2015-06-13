@@ -94,9 +94,12 @@ public class MainFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("Medikament") ;
+
             listMedikaments = new ArrayList<Medikament>() ;
             listApteks = new ArrayList<Apteka>() ;
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Medikament") ;
+            query.fromLocalDatastore() ;
             try{
                 mObjects = query.find() ;
                 for(ParseObject m : mObjects){
@@ -115,8 +118,8 @@ public class MainFragment extends Fragment {
                     listApteks.add(apteka) ;
                     listMedikaments.add(medikament) ;
                 }
-                Log.d("ПРОВЕРКА", listApteks.toString()) ;
-                Log.d("ПРОВЕРКА", listMedikaments.toString()) ;
+//                Log.d("ПРОВЕРКА", listApteks.toString()) ;
+//                Log.d("ПРОВЕРКА", listMedikaments.toString()) ;
             }catch(ParseException e){
                 Log.d("ERROR!!!!", e.getMessage()) ;
                 e.printStackTrace();
