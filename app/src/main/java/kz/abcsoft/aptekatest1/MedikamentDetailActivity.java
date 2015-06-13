@@ -14,6 +14,9 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+
 
 public class MedikamentDetailActivity extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class MedikamentDetailActivity extends AppCompatActivity {
         String medikamentDescription ;
         double medikamentPrice ;
         String imageUrl ;
+        String medikamentFullInformation ;
         String aptekaPhone ;
         String aptekaAddress ;
         @Override
@@ -76,9 +80,14 @@ public class MedikamentDetailActivity extends AppCompatActivity {
                 ParseFile medikamentImage = medikamentObject.getParseFile("image") ;
                 imageUrl = medikamentImage.getUrl() ;
 
+                ParseFile medikamentInformation = medikamentObject.getParseFile("information") ;
+                byte [] information = medikamentInformation.getData() ;
+                medikamentFullInformation = new String(information, "UTF-8") ;
 
             }catch(ParseException e2){
                 e2.printStackTrace();
+            } catch (UnsupportedEncodingException e3) {
+                e3.printStackTrace();
             }
             return null;
         }
@@ -92,6 +101,7 @@ public class MedikamentDetailActivity extends AppCompatActivity {
             ImageView medikamentImage = (ImageView)findViewById(R.id.medikement_image) ;
             TextView aptekaPhoneTV = (TextView)findViewById(R.id.apteka_phone_in_med_detail_activity) ;
             TextView aptekaAddressTV = (TextView)findViewById(R.id.apteka_address_in_med_detail_activity) ;
+            TextView medikamentFullInformationTV = (TextView)findViewById(R.id.medikament_full_information) ;
 
             aptekaNameTV.setText(aptekaName);
             Picasso.with(MedikamentDetailActivity.this).load(imageUrl).into(medikamentImage);
@@ -100,7 +110,7 @@ public class MedikamentDetailActivity extends AppCompatActivity {
             medikamentPriceTV.setText(((Double)medikamentPrice).toString() + " тг.");
             aptekaPhoneTV.setText(aptekaPhone);
             aptekaAddressTV.setText(aptekaAddress);
-
+            medikamentFullInformationTV.setText(medikamentFullInformation);
             dialog.dismiss();
         }
     }
