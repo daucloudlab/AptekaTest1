@@ -5,11 +5,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.squareup.picasso.Picasso;
 
 
 public class MedikamentDetailActivity extends AppCompatActivity {
@@ -37,6 +40,9 @@ public class MedikamentDetailActivity extends AppCompatActivity {
         String medikamentTitle ;
         String medikamentDescription ;
         double medikamentPrice ;
+        String imageUrl ;
+        String aptekaPhone ;
+        String aptekaAddress ;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -52,6 +58,8 @@ public class MedikamentDetailActivity extends AppCompatActivity {
             try {
                 ParseObject aptekaObject = aptekaQuery.get(pid);
                 aptekaName = aptekaObject.getString("name") ;
+                aptekaPhone = aptekaObject.getString("phone") ;
+                aptekaAddress = aptekaObject.getString("address") ;
 
             }catch (ParseException e1){
                 e1.printStackTrace();
@@ -64,6 +72,11 @@ public class MedikamentDetailActivity extends AppCompatActivity {
                 medikamentTitle = medikamentObject.getString("title") ;
                 medikamentDescription = medikamentObject.getString("description") ;
                 medikamentPrice = ((Number)medikamentObject.get("price")).doubleValue() ;
+
+                ParseFile medikamentImage = medikamentObject.getParseFile("image") ;
+                imageUrl = medikamentImage.getUrl() ;
+
+
             }catch(ParseException e2){
                 e2.printStackTrace();
             }
@@ -76,11 +89,17 @@ public class MedikamentDetailActivity extends AppCompatActivity {
             TextView medikamentNameTV = (TextView)findViewById(R.id.medikament_title_in_med_detail_activity) ;
             TextView medikamentDescriptionTV = (TextView)findViewById(R.id.medikament_description_in_med_detail_activity);
             TextView medikamentPriceTV = (TextView)findViewById(R.id.medikament_price) ;
+            ImageView medikamentImage = (ImageView)findViewById(R.id.medikement_image) ;
+            TextView aptekaPhoneTV = (TextView)findViewById(R.id.apteka_phone_in_med_detail_activity) ;
+            TextView aptekaAddressTV = (TextView)findViewById(R.id.apteka_address_in_med_detail_activity) ;
 
             aptekaNameTV.setText(aptekaName);
+            Picasso.with(MedikamentDetailActivity.this).load(imageUrl).into(medikamentImage);
             medikamentNameTV.setText(medikamentTitle);
             medikamentDescriptionTV.setText(medikamentDescription);
             medikamentPriceTV.setText(((Double)medikamentPrice).toString() + " тг.");
+            aptekaPhoneTV.setText(aptekaPhone);
+            aptekaAddressTV.setText(aptekaAddress);
 
             dialog.dismiss();
         }

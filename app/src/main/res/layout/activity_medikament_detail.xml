@@ -12,43 +12,84 @@
 
 </LinearLayout>
 
-        <TextView
-            android:id = "@+id/medikament_apteka_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text = "apteka name"
-            android:layout_gravity="center_horizontal"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id = "@+id/medikement_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="8dp" />
+
 
     <TextView
         android:id = "@+id/medikament_title_in_med_detail_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text = "Medikament name"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        />
+        android:layout_alignTop="@+id/medikement_image"
+        android:layout_toRightOf="@+id/medikement_image"
+        android:textSize="17dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id = "@+id/medikament_description_in_med_detail_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text = "Medikament description"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"/>
+        android:layout_below="@id/medikament_title_in_med_detail_activity"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/medikement_image"
+        android:textSize="15dp" />
 
         <TextView
             android:id = "@+id/medikament_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "medikament price"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"/>
+            android:layout_below="@id/medikament_description_in_med_detail_activity"
+            android:layout_marginTop="1dip"
+            android:layout_toRightOf="@+id/medikement_image"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id = "@+id/medikament_apteka_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "apteka name"
+            android:layout_below="@id/medikament_price"
+            android:layout_toRightOf="@+id/medikement_image"
+            android:layout_marginTop="2dp"
+            android:textSize="13dp" />
+        <TextView
+            android:id = "@+id/apteka_phone_in_med_detail_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "apteka phone"
+            android:layout_below="@id/medikament_apteka_name"
+            android:layout_toRightOf="@+id/medikement_image"
+            android:layout_marginTop="1dp"
+            android:textSize="13dp"/>
+        <TextView
+            android:id = "@+id/apteka_address_in_med_detail_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "apteka address"
+            android:layout_below="@id/apteka_phone_in_med_detail_activity"
+            android:layout_toRightOf="@+id/medikement_image"
+            android:layout_marginTop="1dp"
+            android:textSize="13dp"/>
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Здесь должен быть подробная информация о медикаменте"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"/>
-
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/medikement_image" />
+    </RelativeLayout>
 </LinearLayout>
