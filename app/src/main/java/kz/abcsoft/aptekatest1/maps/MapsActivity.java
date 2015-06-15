@@ -1,12 +1,15 @@
 package kz.abcsoft.aptekatest1.maps;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -64,30 +67,37 @@ public class MapsActivity extends AppCompatActivity {
 
         mMap.setMyLocationEnabled(true);
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String provider = locationManager.getBestProvider(criteria, true);
-        Location myLocation = locationManager.getLastKnownLocation(provider);
-        double myLatitude = myLocation.getLatitude();
-        double myLongitude = myLocation.getLongitude();
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(
-                BitmapDescriptorFactory.HUE_AZURE
-        );
-        mMap.addMarker(new MarkerOptions().position(new LatLng(myLatitude, myLongitude))
-                .icon(bitmapDescriptor)
-                .title("Я нахожусь здесь"));
+//        Criteria criteria = new Criteria();
+//        String provider = locationManager.getBestProvider(criteria, true) ;
+        String provider = LocationManager.NETWORK_PROVIDER ;
+        if(provider == null){
+            Intent gpsOptionsIntent = new Intent(
+                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(gpsOptionsIntent);
+        }else {
+            Location myLocation = locationManager.getLastKnownLocation(provider);
+            double myLatitude = myLocation.getLatitude();
+            double myLongitude = myLocation.getLongitude();
 
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.getUiSettings().setCompassEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(
+                    BitmapDescriptorFactory.HUE_AZURE
+            );
+            mMap.addMarker(new MarkerOptions().position(new LatLng(myLatitude, myLongitude))
+                    .icon(bitmapDescriptor)
+                    .title("Я нахожусь здесь"));
 
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(myLatitude, myLongitude))
-                .zoom(13)
-                .build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        mMap.animateCamera(cameraUpdate);
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.getUiSettings().setCompassEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(new LatLng(myLatitude, myLongitude))
+                    .zoom(13)
+                    .build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+            mMap.animateCamera(cameraUpdate);
+        }
 
 //        mMap.addMarker(new MarkerOptions().position(new LatLng(42.31854237, 69.5962429)).title("Аптека 1"));
 //        mMap.addMarker(new MarkerOptions().position(new LatLng(42.33306634279456, 69.58523947745562)).title("Аптека 2"));
@@ -108,7 +118,7 @@ public class MapsActivity extends AppCompatActivity {
                     String aptekaName = object.getString("name") ;
                     String aptekaAddress = object.getString("address") ;
                     mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
-                            .title(aptekaName + "\n" + aptekaAddress));
+                            .title(aptekaName + " " + aptekaAddress));
             }
         }
         }) ;

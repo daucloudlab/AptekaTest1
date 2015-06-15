@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -46,6 +47,7 @@ public class MainFragment extends Fragment {
 
 
         new MedikamentsOutTask().execute() ;
+
 
         medikamentSearch = (EditText)view.findViewById(R.id.input_medikament_search) ;
         medikamentSearch.addTextChangedListener(new TextWatcher() {
@@ -86,7 +88,11 @@ public class MainFragment extends Fragment {
             listApteks = new ArrayList<Apteka>() ;
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Medikament") ;
-            query.fromLocalDatastore() ;
+
+//            if (query.fromLocalDatastore() != null)
+//                query.fromLocalDatastore() ;
+
+//            else
             try{
                 mObjects = query.find() ;
                 for(ParseObject m : mObjects){

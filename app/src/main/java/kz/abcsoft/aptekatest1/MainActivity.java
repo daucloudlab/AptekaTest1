@@ -51,29 +51,33 @@ public class MainActivity extends AppCompatActivity {
 
         fm.beginTransaction().add(R.id.main_activity_container, new MainFragment()).commit() ;
 
-        ParseQuery<ParseObject> query1 = ParseQuery.getQuery("Apteka") ;
-        query1.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                ParseObject.pinAllInBackground("Apteka", list);
-            }
-        });
+//        ParseQuery<ParseObject> query1 = ParseQuery.getQuery("Apteka") ;
+//        query1.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> list, ParseException e) {
+//                ParseObject.pinAllInBackground("Apteka", list);
+//            }
+//        });
+//
+//        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Medikament") ;
+//        query2.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> list, ParseException e) {
+//                ParseObject.pinAllInBackground("Medikament", list);
+//            }
+//        });
 
-        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Medikament") ;
-        query2.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e){
-                ParseObject.pinAllInBackground("Medikament", list);
-            }
-        });
+
+
+
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ParseObject.unpinAllInBackground("Apteka") ;
-        ParseObject.unpinAllInBackground("Medikament") ;
+//        ParseObject.unpinAllInBackground("Apteka") ;
+//        ParseObject.unpinAllInBackground("Medikament") ;
 
     }
 

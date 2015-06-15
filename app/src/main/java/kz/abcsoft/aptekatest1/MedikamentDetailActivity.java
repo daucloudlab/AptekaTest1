@@ -66,6 +66,7 @@ public class MedikamentDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+                finish() ;
             }
         });
 
@@ -104,7 +105,7 @@ public class MedikamentDetailActivity extends AppCompatActivity {
             }
 
             ParseQuery<ParseObject> medikamentQuery = ParseQuery.getQuery("Medikament") ;
-            medikamentQuery.fromLocalDatastore() ;
+//            medikamentQuery.fromLocalDatastore() ;
             try{
                 ParseObject medikamentObject = medikamentQuery.get(mid) ;
                 medikamentTitle = medikamentObject.getString("title") ;
@@ -138,7 +139,11 @@ public class MedikamentDetailActivity extends AppCompatActivity {
             TextView medikamentFullInformationTV = (TextView)findViewById(R.id.medikament_full_information) ;
 
             aptekaNameTV.setText(aptekaName);
-            Picasso.with(MedikamentDetailActivity.this).load(imageUrl).into(medikamentImage);
+            Picasso.with(MedikamentDetailActivity.this)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.nonephoto)
+                    .error(R.drawable.nonephoto)
+                    .into(medikamentImage);
             medikamentNameTV.setText(medikamentTitle);
             medikamentDescriptionTV.setText(medikamentDescription);
             medikamentPriceTV.setText(((Double)medikamentPrice).toString() + " тг.");
