@@ -1,10 +1,14 @@
 package kz.abcsoft.aptekatest1;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,17 +28,47 @@ public class MedikamentDetailActivity extends AppCompatActivity {
     String pid ;
     String mid ;
 
+    Toolbar toolbar ;
+    String aptekaPhone ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medikament_detail);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.activity_medikament_detail_toolbar) ;
+        toolbar = (Toolbar)findViewById(R.id.activity_medikament_detail_toolbar) ;
         toolbar.setTitle(R.string.medikament_detail_toolbar_title);
+        toolbar.inflateMenu(R.menu.medikament_detail_menu);
+        toolbar.setNavigationIcon(R.drawable.previous_24);
 
         pid= getIntent().getStringExtra("pid") ;
         mid = getIntent().getStringExtra("mid") ;
 
         new ConcreteMedikamentTask().execute() ;
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.phone_in_med_detail_activity:
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        String tel = "tel:" + aptekaPhone;
+                        callIntent.setData(Uri.parse(tel));
+                        startActivity(callIntent);
+                        finish();
+
+                }
+                return false;
+            }
+        });
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
 
     }
 
@@ -45,7 +79,7 @@ public class MedikamentDetailActivity extends AppCompatActivity {
         double medikamentPrice ;
         String imageUrl ;
         String medikamentFullInformation ;
-        String aptekaPhone ;
+
         String aptekaAddress ;
         @Override
         protected void onPreExecute() {
@@ -112,6 +146,9 @@ public class MedikamentDetailActivity extends AppCompatActivity {
             aptekaAddressTV.setText(aptekaAddress);
             medikamentFullInformationTV.setText(medikamentFullInformation);
             dialog.dismiss();
+
+
+
         }
     }
 }

@@ -52,41 +52,16 @@ public class AptekaDetailActivity extends AppCompatActivity {
             }
         });
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
-
-                switch (id) {
-                    case R.id.phone:
-//                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-//                        callIntent.setData(Uri.parse("tel:+77078914322"));
-//                        startActivity(callIntent);
-                        //finish() ;
-                        return true;
-                    case R.id.get_addresses:
-//                        Intent outputAddresses = new Intent(getApplicationContext(), OutputAddressesActivity.class) ;
-//                        outputAddresses.putExtra("addresses", addresses);
-//                        startActivity(outputAddresses);
-//                        finish() ;
-                        return true;
-
-                }
-
-                return false;
-            }
-        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toMedikamentsList = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(toMedikamentsList);
+//                startActivity(toMedikamentsList);
+                onBackPressed();
 
             }
         });
 
-        toolbar.inflateMenu(R.menu.apteka_detail_menu) ;
 
 
 

@@ -15,6 +15,6 @@
     <string name = "nav_menu_item_near_apteki">Карта аптек</string>
     <string name = "nav_menu_item_search_medikament">Медикаменты</string>
     <string name="title_activity_maps">Карта аптек</string>
-    <string name="medikament_detail_toolbar_title">Подробная информация о медикаменте</string>
+    <string name="medikament_detail_toolbar_title">Медикамент</string>
 
 </resources>

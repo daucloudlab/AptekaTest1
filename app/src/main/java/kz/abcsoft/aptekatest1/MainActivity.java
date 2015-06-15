@@ -31,6 +31,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.util.List;
 
+import kz.abcsoft.aptekatest1.maps.MapsActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -120,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
                                 toolbar.setTitle(R.string.search_apteks_title);
                                 return false;
                             case 2:
-//                                Intent intent2 = new Intent(MainActivity.this, MapsActivity.class) ;
-//                                startActivity(intent2);
+                                Intent intent2 = new Intent(MainActivity.this, MapsActivity.class) ;
+                                startActivity(intent2);
 
                                 return false;
                             case 3:
