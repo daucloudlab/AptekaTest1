@@ -44,8 +44,6 @@ public class MainFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_main, container, false) ;
 
-//        listApteks = AptekaTestList.getListApteks() ;
-//        listMedikaments = MedikamentTestList.getAllMedikaments();
 
         new MedikamentsOutTask().execute() ;
 

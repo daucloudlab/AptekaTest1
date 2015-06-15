@@ -55,28 +55,27 @@ public class MainActivity extends AppCompatActivity {
         query1.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
-                try{
-                    ParseObject.pinAll(list);
-                }catch (ParseException e1){
-                    e1.printStackTrace();
-                }
+                ParseObject.pinAllInBackground("Apteka", list);
             }
         });
 
         ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Medikament") ;
         query2.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                try{
-                    ParseObject.pinAll(list);
-                }catch (ParseException e2){
-                    e2.printStackTrace();
-                }
+            public void done(List<ParseObject> list, ParseException e){
+                ParseObject.pinAllInBackground("Medikament", list);
             }
         });
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ParseObject.unpinAllInBackground("Apteka") ;
+        ParseObject.unpinAllInBackground("Medikament") ;
+
+    }
 
     private void initNavigationDrawer(){
 
