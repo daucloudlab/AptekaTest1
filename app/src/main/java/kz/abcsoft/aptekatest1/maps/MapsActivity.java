@@ -98,6 +98,7 @@ public class MapsActivity extends AppCompatActivity implements
             mGoogleApiClient.disconnect();
         }
         super.onStop();
+
     }
 
     @Override
