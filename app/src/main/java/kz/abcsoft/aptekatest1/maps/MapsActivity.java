@@ -70,11 +70,6 @@ public class MapsActivity extends AppCompatActivity implements
 
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        setUpMapIfNeeded();
-//    }
 
 
     @Override
