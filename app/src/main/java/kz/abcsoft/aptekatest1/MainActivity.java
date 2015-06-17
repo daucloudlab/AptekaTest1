@@ -1,8 +1,11 @@
 package kz.abcsoft.aptekatest1;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -41,6 +44,7 @@ import kz.abcsoft.aptekatest1.maps.MapsActivity;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "APTEKA_MAINACTIVITY" ;
+    final int DIALOG_EXIT = 1;
 
     Toolbar toolbar ;
     FragmentManager fm = getSupportFragmentManager();
@@ -147,9 +151,15 @@ public class MainActivity extends AppCompatActivity {
                                 toolbar.setTitle(R.string.search_apteks_title);
                                 return false;
                             case 2:
-                                if(servicesConnected()) {
-                                    Intent intent2 = new Intent(MainActivity.this, MapsActivity.class);
-                                    startActivity(intent2);
+                                String provider = Settings.Secure.getString(getContentResolver(),
+                                        Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+                                if(!provider.equals("")) {
+                                    if (servicesConnected()) {
+                                        Intent intent2 = new Intent(MainActivity.this, MapsActivity.class);
+                                        startActivity(intent2);
+                                    }
+                                } else{
+                                    showDialog(DIALOG_EXIT);
                                 }
                                 return false;
                             case 3:
@@ -163,6 +173,34 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build() ;
     }
+
+    public Dialog onCreateDialog(int id){
+        if(id == DIALOG_EXIT) {
+            AlertDialog.Builder adb = new AlertDialog.Builder(this);
+            adb.setMessage("Возможно у вас не подключен сервис \"Местоположение\". Подключить?");
+            adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent gpsNetworkOptionsIntent = new Intent(
+                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(gpsNetworkOptionsIntent);
+                }
+            });
+            adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    fm.beginTransaction().replace(R.id.main_activity_container, new MainFragment())
+                            .commit();
+                    toolbar.setTitle(R.string.main_toolbar_title);
+                }
+            });
+            return adb.create();
+        }
+        return super.onCreateDialog(id) ;
+
+    }
+
+
 
     public static class ErrorDialogFragment extends DialogFragment {
         private Dialog mDialog ;

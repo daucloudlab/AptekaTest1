@@ -135,10 +135,13 @@ public class MapsActivity extends AppCompatActivity implements
         myLatitude = mLastLocation.getLatitude();
         myLongitude = mLastLocation.getLongitude();
 
-        setUpMapIfNeeded();
+        if(mLastLocation != null)
+            setUpMapIfNeeded();
+        else{
+
+        }
 
     }
-
 
 
 
