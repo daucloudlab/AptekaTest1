@@ -1,5 +1,7 @@
 package kz.abcsoft.aptekatest1;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +15,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
@@ -35,6 +39,8 @@ import kz.abcsoft.aptekatest1.maps.MapsActivity;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private final String TAG = "APTEKA_MAINACTIVITY" ;
 
     Toolbar toolbar ;
     FragmentManager fm = getSupportFragmentManager();
@@ -81,6 +87,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private boolean servicesConnected(){
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) ;
+        if(resultCode == ConnectionResult.SUCCESS){
+            Log.d(TAG, "Google Play services доступен") ;
+            return true ;
+        } else{
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this, 0) ;
+            if(dialog != null){
+                ErrorDialogFragment errorFragment = new ErrorDialogFragment() ;
+                errorFragment.setDialog(dialog) ;
+                errorFragment.show(getFragmentManager(), TAG);
+            }
+            return false ;
+        }
+    }
+
     private void initNavigationDrawer(){
 
         AccountHeader accountHeader = new AccountHeaderBuilder()
@@ -125,9 +147,10 @@ public class MainActivity extends AppCompatActivity {
                                 toolbar.setTitle(R.string.search_apteks_title);
                                 return false;
                             case 2:
-                                Intent intent2 = new Intent(MainActivity.this, MapsActivity.class) ;
-                                startActivity(intent2);
-
+                                if(servicesConnected()) {
+                                    Intent intent2 = new Intent(MainActivity.this, MapsActivity.class);
+                                    startActivity(intent2);
+                                }
                                 return false;
                             case 3:
                                 fm.beginTransaction().replace(R.id.main_activity_container, new MainFragment())
@@ -139,6 +162,25 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build() ;
+    }
+
+    public static class ErrorDialogFragment extends DialogFragment {
+        private Dialog mDialog ;
+
+
+        public ErrorDialogFragment(){
+            super() ;
+            mDialog = null ;
+        }
+
+        public void setDialog(Dialog dialog) {
+            mDialog = dialog;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return mDialog;
+        }
     }
 
 }
