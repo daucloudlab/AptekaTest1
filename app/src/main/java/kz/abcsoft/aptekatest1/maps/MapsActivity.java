@@ -72,9 +72,7 @@ public class MapsActivity extends AppCompatActivity implements
 //        setUpMapIfNeeded();
 
 
-
     }
-
 
 
     @Override
@@ -92,7 +90,7 @@ public class MapsActivity extends AppCompatActivity implements
         }
         mGoogleApiClient.connect();
 
-        setUpMapIfNeeded();
+//        setUpMapIfNeeded();
     }
 
     @Override
@@ -137,6 +135,8 @@ public class MapsActivity extends AppCompatActivity implements
         myLatitude = mLastLocation.getLatitude();
         myLongitude = mLastLocation.getLongitude();
 
+        setUpMapIfNeeded();
+
     }
 
 
@@ -175,7 +175,7 @@ public class MapsActivity extends AppCompatActivity implements
 
 //        if(mLastLocation != null) {
 
-//            Log.d("LATITUDE", ((Double)myLatitude).toString()) ;
+            Log.d("LATITUDE_EKINSHI", ((Double)myLatitude).toString()) ;
 
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(
