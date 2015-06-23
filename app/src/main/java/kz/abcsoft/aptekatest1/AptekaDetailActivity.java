@@ -43,7 +43,7 @@ public class AptekaDetailActivity extends AppCompatActivity {
 
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Apteka") ;
-        query.fromLocalDatastore() ;
+//        query.fromLocalDatastore() ;
         query.getInBackground(pid, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {

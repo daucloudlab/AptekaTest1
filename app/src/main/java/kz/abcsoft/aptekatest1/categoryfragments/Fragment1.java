@@ -69,7 +69,7 @@ public class Fragment1 extends Fragment {
             apteksQuery.whereEqualTo("objectId", pid) ;
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Medikament") ;
-            query.fromLocalDatastore() ;
+//            query.fromLocalDatastore() ;
             query.whereEqualTo("category_id", "1") ;
 
             query.whereMatchesQuery("apteka_rel", apteksQuery);
